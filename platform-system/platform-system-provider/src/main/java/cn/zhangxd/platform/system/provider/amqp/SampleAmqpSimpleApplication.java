@@ -11,8 +11,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 
 import java.util.Date;
 
-@Configuration
-@RabbitListener(queues = "foo")
+//@Configuration
+//@RabbitListener(queues = "foo")
 public class SampleAmqpSimpleApplication {
 
     @Autowired
