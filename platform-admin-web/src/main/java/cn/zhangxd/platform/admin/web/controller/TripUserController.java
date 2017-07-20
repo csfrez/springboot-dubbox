@@ -18,6 +18,7 @@ import java.util.Map;
  *
  * @author zhangxd
  */
+@CrossOrigin
 @Validated
 @RestController
 @RequestMapping("/trip/user")

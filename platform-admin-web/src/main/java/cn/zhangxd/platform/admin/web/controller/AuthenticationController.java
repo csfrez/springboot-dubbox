@@ -1,9 +1,10 @@
 package cn.zhangxd.platform.admin.web.controller;
 
-import cn.zhangxd.platform.admin.web.common.controller.BaseController;
-import cn.zhangxd.platform.admin.web.security.utils.TokenUtil;
-import cn.zhangxd.platform.common.web.security.AuthenticationTokenFilter;
-import cn.zhangxd.platform.system.api.entity.SysUser;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+import cn.zhangxd.platform.admin.web.common.controller.BaseController;
+import cn.zhangxd.platform.admin.web.security.utils.TokenUtil;
+import cn.zhangxd.platform.common.web.security.AuthenticationTokenFilter;
+import cn.zhangxd.platform.system.api.entity.SysUser;
 
 /**
  * The type Authentication controller.
@@ -31,6 +35,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthenticationController extends BaseController {
     /**
      * 权限管理
@@ -47,6 +52,9 @@ public class AuthenticationController extends BaseController {
      */
     @Autowired
     private TokenUtil jwtTokenUtil;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * Create authentication token bearer auth token.
@@ -56,7 +64,8 @@ public class AuthenticationController extends BaseController {
      */
     @PostMapping(value = "/token")
     public Map<String, Object> createAuthenticationToken(@RequestBody SysUser sysUser) {
-
+    	System.out.println(sysUser);
+    	System.out.println(passwordEncoder.encode(sysUser.getPassword()));
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(sysUser.getLoginName(), sysUser.getPassword())

@@ -1,7 +1,7 @@
 spring:
   redis:
     database: 0
-    host: 127.0.0.1
+    host: 10.96.2.122
     #password: # Login password of the redis server.
     port: 6379
     timeout: 0
@@ -19,7 +19,7 @@ spring:
       max-request-size: 50Mb # Max request size. Values can use the suffixed "MB" or "KB" to indicate a Megabyte or Kilobyte size.
 
 server:
-  port: 8080
+  port: 9090
   tomcat:
     accesslog:
       debug: true #请求响应数据调试

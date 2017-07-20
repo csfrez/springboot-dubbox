@@ -47,10 +47,8 @@ public final class AuthUserFactory {
      * @return 权限列表
      */
     private static List<SimpleGrantedAuthority> mapToGrantedAuthorities(List<SysRole> sysRoles, List<SysMenu> sysMenus) {
-
-        List<SimpleGrantedAuthority> authorities =
-            sysRoles.stream().filter(SysRole::getEnabled)
-                .map(sysRole -> new SimpleGrantedAuthority(sysRole.getName())).collect(Collectors.toList());
+    	
+        List<SimpleGrantedAuthority> authorities = sysRoles.stream().filter(SysRole::getEnabled).map(sysRole -> new SimpleGrantedAuthority(sysRole.getName())).collect(Collectors.toList());
 
         // 添加基于Permission的权限信息
         sysMenus.stream().filter(menu -> StringHelper.isNotBlank(menu.getPermission())).forEach(menu -> {
