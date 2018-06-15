@@ -91,7 +91,7 @@ public class UserController extends BaseController {
         @ApiParam(required = true, value = "短信验证码") @RequestParam("captcha") String captcha
     ) throws InvalidCaptchaException {
         //校验验证码
-        captchaService.validCaptcha(mobile, captcha);
+        //captchaService.validCaptcha(mobile, captcha);
 
         TripUser user = new TripUser();
         user.setMobile(mobile);

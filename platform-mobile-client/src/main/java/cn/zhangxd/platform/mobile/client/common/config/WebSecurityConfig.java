@@ -17,9 +17,8 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //忽略权限校验的访问路径
-        web
-            .ignoring()
-            .antMatchers(
+        web.ignoring()
+           .antMatchers(
                 "/hello",
                 "/favicon.ico",
                 "/swagger**/**",
@@ -28,16 +27,13 @@ public class WebSecurityConfig extends AbstractWebSecurityConfig {
                 "/*/sms/captcha",
                 "/*/user/password",
                 "/*/currency/**"
-            )
-            .antMatchers(HttpMethod.POST, "/*/user")
-        ;
+           )
+           .antMatchers(HttpMethod.POST, "/*/user");
     }
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
-        security
-            .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/*/auth/token").permitAll();
+        security.authorizeRequests().antMatchers(HttpMethod.POST, "/*/auth/token").permitAll();
         super.configure(security);
     }
 }
