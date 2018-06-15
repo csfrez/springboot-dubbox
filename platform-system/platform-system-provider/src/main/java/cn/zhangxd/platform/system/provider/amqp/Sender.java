@@ -9,9 +9,9 @@ public class Sender {
 	@Autowired
     private RabbitTemplate rabbitTemplate;
 
-	@Scheduled(fixedDelay = 10000L)
+	@Scheduled(fixedDelay = 1000L)
 	public void send() {
-		this.rabbitTemplate.convertAndSend("foo", "hello");
+		this.rabbitTemplate.convertAndSend("foo", System.currentTimeMillis());
 	}
 
 }

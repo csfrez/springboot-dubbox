@@ -11,8 +11,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 
 import java.util.Date;
 
-//@Configuration
-//@RabbitListener(queues = "foo")
+@Configuration
+@RabbitListener(queues = "foo")
 public class SampleAmqpSimpleApplication {
 
     @Autowired
@@ -29,7 +29,7 @@ public class SampleAmqpSimpleApplication {
     }
 
     @RabbitHandler
-    public void process(@Payload String foo) {
+    public void process(@Payload Long foo) {
         //邮件发送
 //        SimpleMailMessage message = new SimpleMailMessage();
 //        message.setFrom("aaa@xxx.com");
@@ -37,8 +37,8 @@ public class SampleAmqpSimpleApplication {
 //        message.setSubject("主题：测试邮件");
 //        message.setText("测试邮件内容" + new Date() + ": " + foo);
 //        mailSender.send(message);
-
-        System.out.println(new Date() + ": " + foo);
+    	long time = System.currentTimeMillis();
+        System.out.println("time=" + (time-foo));
     }
 
 }
